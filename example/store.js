@@ -1,8 +1,14 @@
 import creatStore from '../src'
 
-const { Provider, connect } = creatStore({ count: 5 })
+let initState = {
+  example: {
+    count: 5
+  }
+}
+const { Provider, connect, dispatch } = creatStore(initState)
 
 export {
   Provider,
-  connect
+  connect,
+  dispatch
 }

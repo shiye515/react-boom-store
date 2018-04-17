@@ -1,7 +1,7 @@
 {
   "name": "react-boom-store",
   "version": "0.0.1",
-  "description": "webpack demo",
+  "description": "47行代码实现的 react 状态管理库",
   "main": "lib/react-boom-store.js",
   "module": "src/index.js",
   "scripts": {
@@ -11,6 +11,14 @@
   },
   "author": "shiye515@gmail.com",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shiye515/react-boom-store"
+  },
+  "bugs": {
+    "url": "https://github.com/shiye515/react-boom-store/issues"
+  },
+  "homepage": "https://github.com/shiye515/react-boom-store",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",

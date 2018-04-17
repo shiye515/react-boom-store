@@ -51,10 +51,11 @@ typings/
 
 # Output of 'npm pack'
 *.tgz
+dist/
+lib/
 
 # Yarn Integrity file
 .yarn-integrity
 
 # dotenv environment variables file
 .env
-
