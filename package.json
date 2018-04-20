@@ -1,6 +1,6 @@
 {
   "name": "react-boom-store",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "47行代码实现的 react 状态管理库",
   "main": "lib/react-boom-store.js",
   "scripts": {
