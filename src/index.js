@@ -1,20 +1,23 @@
 import React, { Component } from 'react'
+import compose from './compose'
 const defaultMap = state => state
 /**
  * 创建context
  * @param {object} state 初始值
  */
-export default function creatStore (state = {}) {
-  const Store = React.createContext({})
+export default function createStore (state = {}, middlewares = []) {
+  const Store = React.createContext()
   let dispatch
   class Provider extends Component {
     constructor (props) {
       super(props)
       this.state = state
       dispatch = (updater, callback) => {
-        // console.log(updater.name) // action name
-        this.setState(updater, callback)
+        this.setState(updater, function () {
+          callback && callback(this.state)
+        })
       }
+      dispatch = compose(...middlewares)(dispatch)
     }
     render () {
       return (
@@ -25,7 +28,7 @@ export default function creatStore (state = {}) {
     }
   }
   /**
-   *
+   * 高阶组件，把state通过props透传
    * @param {function} mapStateToProps
    */
   function connect (mapStateToProps = defaultMap) {
@@ -33,7 +36,12 @@ export default function creatStore (state = {}) {
       return function EnhancedComponent (props) {
         return (
           <Store.Consumer>
-            {state => <Component {...props} {...mapStateToProps(state)} dispatch={dispatch} />}
+            {state => {
+              if (!state) {
+                throw new Error('please wrap the root component in a <Provider>')
+              }
+              return <Component {...props} {...mapStateToProps(state)} dispatch={dispatch} />
+            }}
           </Store.Consumer>
         )
       }
@@ -41,7 +49,6 @@ export default function creatStore (state = {}) {
   }
   return {
     Provider,
-    connect,
-    dispatch
+    connect
   }
 }
